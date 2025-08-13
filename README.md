@@ -188,15 +188,6 @@ python scripts/generate_tokenized_dataset.py
 python scripts/train_model.py
 ```
 
-## Contributing
-
-We welcome contributions! Areas of interest:
-- Improving humor quality and coherence
-- Adding new interaction modes
-- Optimizing performance
-- Expanding training data
-- UI/UX enhancements
-
 ## Known Limitations
 
 - **Special tokens**: May occasionally include training artifacts
@@ -219,8 +210,6 @@ We welcome contributions! Areas of interest:
 MIT License - see LICENSE file for details.
 
 ## Citation
-
-If you use HumorLLM in your research, please cite:
 
 ```bibtex
 @software{humorllm2024,
