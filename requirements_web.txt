@@ -1,0 +1,13 @@
+Flask==2.3.3
+numpy~=1.25.2
+torch~=2.0.1
+torchinfo~=1.8.0
+setuptools==65.6.3
+prettytable~=3.8.0
+datasets~=2.14.4
+PyYAML~=6.0.1
+urllib3==1.26.15
+tokenizers~=0.14.1
+transformers~=4.35.0
+huggingface-hub~=0.16.4
+einops~=0.7.0

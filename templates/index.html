@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HumorLLM - AI Humor Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <h1>🤖 HumorLLM</h1>
+                <p>AI-Powered Humor Generation</p>
+            </div>
+            <div class="model-info">
+                <span class="model-badge">Seagull Transformer</span>
+                <span class="params-badge">110M Parameters</span>
+            </div>
+        </header>
+
+        <!-- Description Section -->
+        <div class="description-section">
+            <div class="description-content">
+                <div class="description-header">
+                    <h2>🎭 About HumorLLM</h2>
+                    <button id="toggle-description" class="toggle-btn" title="Hide/Show Description">−</button>
+                </div>
+                <div id="description-details">
+                    <p>HumorLLM is a custom transformer model trained on caption data for generating humorous text completions. 
+                       It excels at <strong>observational humor</strong>, <strong>absurd situations</strong>, and <strong>quirky commentary</strong> 
+                       rather than traditional setup-punchline jokes.</p>
+                    
+                    <div class="model-strengths">
+                    <div class="strength-item">
+                        <span class="strength-icon">🔍</span>
+                        <div>
+                            <strong>Observational Humor</strong>
+                            <p>"The thing about X is..." scenarios</p>
+                        </div>
+                    </div>
+                    <div class="strength-item">
+                        <span class="strength-icon">🎪</span>
+                        <div>
+                            <strong>Absurd Situations</strong>
+                            <p>Unusual character combinations</p>
+                        </div>
+                    </div>
+                    <div class="strength-item">
+                        <span class="strength-icon">💻</span>
+                        <div>
+                            <strong>Tech/Programming</strong>
+                            <p>Code and technology humor</p>
+                        </div>
+                    </div>
+                    <div class="strength-item">
+                        <span class="strength-icon">🎨</span>
+                        <div>
+                            <strong>Caption Style</strong>
+                            <p>Descriptive, visual humor</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tips-section">
+                    <h3>💡 Tips for Best Results</h3>
+                    <div class="tips-grid">
+                        <div class="tip-item">
+                            <strong>✅ Try:</strong> "Dating apps are like...", "The worst thing about X is..."
+                        </div>
+                        <div class="tip-item">
+                            <strong>❌ Avoid:</strong> Traditional joke setups like "Why did the chicken..."
+                        </div>
+                        <div class="tip-item">
+                            <strong>🎛️ Settings:</strong> Use temperature 0.7-0.9 for best creativity balance
+                        </div>
+                        <div class="tip-item">
+                            <strong>⌨️ Shortcut:</strong> Press Ctrl+Enter to generate quickly
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Input Section -->
+            <div class="input-section">
+                <div class="input-group">
+                    <label for="prompt-input">Enter your prompt:</label>
+                    <textarea 
+                        id="prompt-input" 
+                        placeholder="Why did the chicken cross the road? Because..."
+                        rows="3"
+                        maxlength="200"></textarea>
+                    <div class="char-count">
+                        <span id="char-counter">0</span>/200
+                    </div>
+                </div>
+
+                <!-- Controls -->
+                <div class="controls">
+                    <div class="control-group">
+                        <label for="temperature">Creativity:</label>
+                        <input type="range" id="temperature" min="0.1" max="1.5" step="0.1" value="0.7">
+                        <span id="temp-value">0.7</span>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="max-length">Max Length:</label>
+                        <input type="range" id="max-length" min="10" max="80" step="5" value="40">
+                        <span id="length-value">40</span>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button id="generate-btn" class="generate-btn">
+                        <span class="btn-text">Generate Humor</span>
+                        <span class="spinner" style="display: none;">🔄</span>
+                    </button>
+                    <button id="random-prompt-btn" class="random-btn">Random Prompt</button>
+                </div>
+            </div>
+
+            <!-- Output Section -->
+            <div class="output-section">
+                <div class="output-header">
+                    <h3>Generated Humor</h3>
+                    <button id="copy-btn" class="copy-btn" style="display: none;">📋 Copy</button>
+                </div>
+                
+                <div id="output-container" class="output-container">
+                    <div class="placeholder">
+                        <p>🎭 Your AI-generated humor will appear here!</p>
+                        <p class="subtitle">Enter a prompt above and click "Generate Humor" to get started.</p>
+                    </div>
+                </div>
+
+                <!-- Generation Info -->
+                <div id="generation-info" class="generation-info" style="display: none;">
+                    <span id="generation-time"></span>
+                    <span id="token-count"></span>
+                </div>
+            </div>
+
+            <!-- Examples Section -->
+            <div class="examples-section">
+                <h3>Example Prompts</h3>
+                <div class="example-grid">
+                    <button class="example-item" data-prompt="A cat walks into a bar and">
+                        🐱 "A cat walks into a bar and..."
+                    </button>
+                    <button class="example-item" data-prompt="Why did the programmer quit his job?">
+                        💻 "Why did the programmer quit his job?"
+                    </button>
+                    <button class="example-item" data-prompt="The funniest thing about artificial intelligence is">
+                        🤖 "The funniest thing about artificial intelligence is..."
+                    </button>
+                    <button class="example-item" data-prompt="My computer is so slow that">
+                        🐌 "My computer is so slow that..."
+                    </button>
+                    <button class="example-item" data-prompt="A robot, a human, and a cat walk into an elevator">
+                        🤖👤🐱 "A robot, a human, and a cat walk into an elevator..."
+                    </button>
+                    <button class="example-item" data-prompt="Dating apps are like">
+                        💕 "Dating apps are like..."
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2024 HumorLLM Project | Custom Seagull Transformer Architecture</p>
+            <p>Built with PyTorch, Flask, and a sense of humor 😄</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
